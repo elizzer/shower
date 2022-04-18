@@ -53,6 +53,6 @@ const User = mongoose.Schema({
 
 })
 
-User.virtual('password').set
+
 
 module.exports=mongoose.model('User',User);

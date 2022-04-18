@@ -7,7 +7,7 @@ const { default: mongoose } = require("mongoose");
 const morgan = require("morgan");
 
 //impoerting external file
-const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
 
 dotenv.config();
@@ -18,8 +18,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"))
 
-app.use('/api/user',userRoutes)
-app.use('/api/auth',authRoutes)
+app.use('/api/post',postRoutes);
+app.use('/api/auth',authRoutes);
+
 
 mongoose.connect(process.env.DB_URI).then(()=>{
     console.log("[+] DB up and ready to serve");

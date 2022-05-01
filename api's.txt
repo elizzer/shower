@@ -1,0 +1,14 @@
+/api/auth/login
+/api/auth/signin
+
+/api/post/:userid			(create new post by the user userid)
+/api/post/like/:userid/:postid
+
+/api/tips/:userid/:postid 	(create new tip for the post)
+/api/tips/:userid/:postid/:tipid (replay for the tip with tip id ':tipid')
+
+/api/user/follow/:userid	(follow the user in the content by the user in the url)
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmViZWRlYTE0NjBjMDFiNGQxYjRkMCIsImlhdCI6MTY1MTQyNTAwM30.LI6lxKpJaYvkO-2R9HdT4CStH0Tv_1JveKAhJr7mxqA
+626ebedea1460c01b4d1b4d0

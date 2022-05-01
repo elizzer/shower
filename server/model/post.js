@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Post = mongoose.Schema({
     creator:{
             type:mongoose.Schema.ObjectId,
-            ref:'users'
+            ref:'User'
         },
     title:{
         type:String,
@@ -16,15 +16,10 @@ const Post = mongoose.Schema({
     like:[
         {
             type:mongoose.Schema.ObjectId,
-            ref:'users'
+            ref:'User'
         }
     ],
-    tips:[
-        {
-            type:mongoose.Schema.ObjectId,
-            ref:'tips'
-        }
-    ],
+    
     hashTags:[
         {
             type:String,
@@ -34,4 +29,4 @@ const Post = mongoose.Schema({
 
 },{timestamps:true})
 
-module.exports=mongoose.model("post",Post);
+module.exports=mongoose.model("Post",Post);

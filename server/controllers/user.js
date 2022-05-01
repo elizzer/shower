@@ -15,3 +15,44 @@ exports.savePost=(creatorId,PostId)=>{
     return;
 
 }
+
+exports.followUser=(req,res)=>{
+    if(req.userId==req.body.userId){
+        return res.status(400).json({code:0,msg:"this aciton is inapropriate"});
+    }
+    console.log('[+]User ',req.userId,' follows ',req.body.userId)
+    User.findById(req.userId,(err,user)=>{
+        if(err||!user){
+            return res.status(400).json({code:0,msg:"User cannot perform this action"});
+        }
+        if(user.following.every(e=>e!=req.body.userId)){
+            user.following.push(req.body.userId);
+            user.save().then(()=>{
+                User.findById(req.body.userId,(err,data)=>{
+                    if(err||!data){
+                        return res.status(400).json({code:0,msg:"User cannot perform this action"});
+                    }
+                    data.followers.push(req.userId);
+                    data.save().then(()=>{
+                        return res.status(200).json({code:1,msg:"User followed"});
+                    })
+                })
+            })
+            return;
+        }
+        user.following=user.following.filter(e=>e!=req.body.userId);
+        user.save().then(()=>{
+            User.findById(req.body.userId,(err,data)=>{
+                if(err||!data){
+                    return res.status(400).json({code:0,msg:"User cannot perform this action"});
+                }
+                data.followers=data.followers.filter(e=>e!=req.userId);
+                data.save().then(()=>{
+                    return res.status(200).json({code:1,msg:"User unfollowed"});
+                })
+            })
+        })
+
+
+    })
+}

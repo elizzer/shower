@@ -3,6 +3,7 @@ const {validationResult, Result}= require('express-validator');
 const bycrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const { post } = require("../validator/post");
+const read = require("body-parser/lib/read");
 
 exports.createUser =(req,res)=>{
    const newUser = new User(req.body);
@@ -58,10 +59,15 @@ exports.signin=(req,res)=>{
 }
 
 exports.requiredSignin=(req,res,next)=>{
+    
+    if(!req.headers.authorization){
+        return res.status(400).json({code:0,msg:"User not singed in"});  
+    }
     const token=req.headers.authorization.split(" ")[1];
-    User.findById(req.id,(err,user)=>{
+    User.findById(req.userId,(err,user)=>{
         if(err||!user){
-            return res.status(400).json({code:0,msg:"User not singed in"});
+            console.log("[+]user signedin ",req.userId)
+            return res.status(400).json({code:0,msg:"User not registered"});
         }
         console.log('[+]User',user)
         JWT.verify(token,process.env.SECRET_KEY,(err,data)=>{

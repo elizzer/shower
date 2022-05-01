@@ -9,6 +9,9 @@ const morgan = require("morgan");
 //impoerting external file
 const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
+const tipsRoutes = require('./routes/tips');
+const userRoutes = require('./routes/user');
+const postListRoutes = require('./routes/postList');
 
 dotenv.config();
 
@@ -20,6 +23,9 @@ app.use(morgan("dev"))
 
 app.use('/api/post',postRoutes);
 app.use('/api/auth',authRoutes);
+app.use('/api/tips',tipsRoutes);
+app.use('/api/user',userRoutes);
+app.use('/api/postList',postListRoutes);
 
 
 mongoose.connect(process.env.DB_URI).then(()=>{

@@ -35,19 +35,19 @@ const User = mongoose.Schema({
     followers:[
         {
             type:mongoose.Schema.ObjectId,
-            ref:'users'
+            ref:'User'
         }
     ],
     following:[
         {
             type:mongoose.Schema.ObjectId,
-            ref:'users'
+            ref:'User'
         }
     ],
     post:[
         {
             type:mongoose.Schema.ObjectId,
-            ref:"post"
+            ref:'Post'
         }
     ],
 

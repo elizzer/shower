@@ -1,0 +1,28 @@
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    width: fill;
+    padding: .5rem 1rem;
+    
+}
+
+.card{
+    border-radius:15px;
+    background-color: #F2F7FB;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.card:hover{
+    background-color: #022F96;
+}
+
+.card:hover > svg path{
+    fill:white;
+}
+
+.card svg{
+    padding: .25rem;
+   
+}

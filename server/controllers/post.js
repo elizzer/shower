@@ -13,6 +13,7 @@ exports.createPost=(req,res)=>{
     }
     const newPost = new Post(req.body);
     newPost.creator=req.userId;
+    newPost.hashTags=splitHashtag(req.body.hashtags)
     if(!savePost(req.userId,newPost._id)){
         newPost.save((err,post)=>{
             if(err||!post){
@@ -63,3 +64,39 @@ exports.saveTip=(tid,pid)=>{
     return;
 }
 
+exports.updatePost=(req,res)=>{
+    console.log('[+]Update post request by the user ',req.userId);
+    const error = validationResult(req).errors;
+    if(error.length){
+        console.log('[+]Validation error from post ',error);
+        return res.status(400).json({code:0,msg:error[0].msg})
+    }
+    Post.findById(req.postId,(err,data)=>{
+        if(err||!data){
+            return res.json({code:0,msg:"Unable to find the post"})
+        }
+        console.log('[+] The new updated post', req.body)
+        console.log('[+]The old version of the post',data)
+        data.title=req.body.title
+        data.description=req.body.description
+        data.hashTags=splitHashtag(req.body.hashtag)
+        data.save((err,data)=>{
+            if(err||!data){
+                console.log('[+]Unable to save the newer verion of the post')
+                return res.json({code:0,msg:"Unable to save the newer version of the post"})
+            }
+            console.log('[+]Post updated sucessfully')
+            return res.json({code:1,msg:"Post updated sucessfully"})
+        })
+    })
+   
+}
+
+splitHashtag=(hashtag)=>{
+    var array= hashtag.split('#')
+    var filtred= array.filter((e)=>{
+        return e!=''
+    })
+    console.log('[+] array of hashtags ',filtred)
+    return filtred
+}

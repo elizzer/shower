@@ -4,6 +4,7 @@ const bycrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 const { post } = require("../validator/post");
 const read = require("body-parser/lib/read");
+const { findById } = require("../model/user");
 
 exports.createUser =(req,res)=>{
    const newUser = new User(req.body);
@@ -32,6 +33,8 @@ exports.createUser =(req,res)=>{
 
    
 }
+
+
 
 exports.signin=(req,res)=>{
     const errors = validationResult(req).errors;

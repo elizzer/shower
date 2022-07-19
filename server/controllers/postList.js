@@ -23,3 +23,15 @@ exports.userPosts=(req,res)=>{
     })
  
 }
+
+exports.hashTags=(req,res)=>{
+    console.log('[+]Hastags requested',req.body.hashTags);
+    Post.find({hashTags:{"$in":req.body.hashTags}},(err,data)=>{
+        if(err||!data){
+            return res.json({code:0,msg:"no post on the given hashtags"})
+        }
+        console.log('[+]Post ',data)
+        return res.json({code:1,msg:"post fetch success",post:data})
+       
+    })
+}

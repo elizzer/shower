@@ -7,6 +7,7 @@ const {login,signIn} = require("../validator/user")
 
 router.post('/login',login,createUser)
 
+
 router.post('/signin',signIn,signin)
 
 module.exports=router;

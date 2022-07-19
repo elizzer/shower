@@ -56,3 +56,13 @@ exports.followUser=(req,res)=>{
 
     })
 }
+
+exports.updateUser=(req,res)=>{
+    findById(req.userId,(err,user)=>{
+        if(err||!user){
+            console.log('[+] Unable to find the user for updation');
+            return res.json({code:0,msg:"User not authorized"})
+        }
+        console.log('[+]Update user ',user)
+    })
+}

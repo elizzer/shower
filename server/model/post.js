@@ -25,7 +25,13 @@ const Post = mongoose.Schema({
             type:String,
             trim:true
         }
-    ]
+    ],
+    view:{
+        type:Boolean,
+        default:1
+    }
+
+// view 1->public,0->private
 
 },{timestamps:true})
 

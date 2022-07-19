@@ -28,10 +28,11 @@ app.use('/api/user',userRoutes);
 app.use('/api/postList',postListRoutes);
 
 
-mongoose.connect(process.env.DB_URI).then(()=>{
-    console.log("[+] DB up and ready to serve");
-})
+
 
 app.listen(process.env.SERVER_PORT,()=>{
     console.log("[+] server up and running on port ",process.env.SERVER_PORT)
+    mongoose.connect(process.env.DB_URI).then(()=>{
+        console.log("[+] DB up and ready to serve");
+    })  
 })
